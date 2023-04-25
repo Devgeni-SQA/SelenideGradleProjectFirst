@@ -12,7 +12,7 @@ public class FirstTest {
         $x("//input[@type='email']").setValue("qae4488@gmail.com")
                 .shouldBe(Condition.value("qae4488@gmail.com"))
                 .pressEnter();
-        $("div > input[type='password']").setValue("44884488")
+        $("div > input[type='password']").shouldBe(Condition.editable).setValue("44884488")
                 .shouldBe(Condition.value("44884488"))
                 .pressEnter();
         $x("//a[@aria-label='Почта (откроется новая вкладка)']").click();
