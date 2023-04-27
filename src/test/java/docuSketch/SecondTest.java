@@ -1,6 +1,8 @@
 package docuSketch;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import java.time.Duration;
@@ -14,6 +16,8 @@ public class SecondTest {
 
     @Test
     public void testGmailtitle() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
         open("https://www.google.com/");
 
         $x("//*[@id='gb']//div[2]/a/span").click();
