@@ -24,7 +24,7 @@ test {
     useJUnitPlatform()
     systemProperties = [
             'gmailusername': "$gmailusername",
-            'gmailpassword': "$gmailpassword"
+            'gmailpassword': "$gmailpassword",
     ]
     testLogging.showStandardStreams = true;
 }
