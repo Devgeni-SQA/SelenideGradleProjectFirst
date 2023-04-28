@@ -7,3 +7,4 @@
 # Allure Report
 allure-results/
 .allure/
+ConfProperties.java
