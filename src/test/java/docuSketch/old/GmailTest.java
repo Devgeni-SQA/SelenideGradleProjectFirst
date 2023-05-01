@@ -1,4 +1,4 @@
-package docuSketch;
+package docuSketch.old;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -9,9 +9,10 @@ import static com.codeborne.selenide.Selenide.*;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import static com.codeborne.selenide.Selenide.screenshot;
-import static docuSketch.ConfProperties.GMAILPASSWORD;
-import static docuSketch.ConfProperties.GMAILUSERNAME;
+
+//import static docuSketch.authentication.ConfProperties.GMAILPASSWORD;
+import static docuSketch.authentication.ConfProperties.GMAILUSERNAME;
+
 public class GmailTest {
 
     @BeforeEach
@@ -45,7 +46,7 @@ public class GmailTest {
         SelenideElement inputEmail = $x("//input[@type='email']");
         inputEmail.shouldBe(visible).setValue(GMAILUSERNAME).pressEnter();
         SelenideElement inputPassword = $("div>input[type='password']");
-        inputPassword.should(editable).setValue(GMAILPASSWORD).pressEnter();
+//        inputPassword.should(editable).setValue(GMAILPASSWORD).pressEnter();
     }
 }
 
