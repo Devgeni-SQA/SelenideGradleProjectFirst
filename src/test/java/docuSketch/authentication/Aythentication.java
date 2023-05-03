@@ -12,7 +12,7 @@ public class Aythentication {
 
         public static void login() {
             clickButtonEnterGoogleAccount();
-            fieldInputEmail.shouldBe(visible).setValue(GMAILUSERNAME).pressEnter();
-            fieldInputPassword.should(Condition.exist).setValue(GMAILPASSWORD).pressEnter();
+            fieldInputEmail.shouldBe(visible).setValue(ConfProperties.getLOGIN(GMAILUSERNAME)).pressEnter();
+            fieldInputPassword.should(Condition.exist).setValue(ConfProperties.getPASSWORD(GMAILPASSWORD)).pressEnter();
         }
     }
