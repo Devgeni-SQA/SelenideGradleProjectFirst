@@ -3,7 +3,6 @@ package immoviewer;
 import com.codeborne.selenide.*;
 import immoviewer.confProperties.ConfPropertiesProject;
 import io.qameta.allure.Allure;
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -20,10 +19,12 @@ public class OrdersTestSteps {
     public static void chooseStatus() {
         buttonOfStatusDone.click(); }
     @Step
-    public static void checkStatusOfResult() {
-        statusOfSelectedRow.shouldHave(Condition.text("DONE"));
+    public static void checkStatusOfResult() throws InterruptedException {
+        Thread.sleep(6000);
+        for (SelenideElement selenideElement : statusOfSelectedRow) {
+            selenideElement.shouldHave(Condition.text("DONE"));
+        }
     }
-    @Attachment
     public static void addScreenshot() {
         Allure.getLifecycle().addAttachment(
                 "finalPageScreenshot", "image/png", "png",
