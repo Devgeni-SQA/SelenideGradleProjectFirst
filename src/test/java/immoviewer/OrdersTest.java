@@ -1,6 +1,7 @@
 package immoviewer;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import immoviewer.confProperties.ConfPropertiesProject;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
@@ -22,9 +23,9 @@ public class OrdersTest {
         openBaseUrl();
     }
     @Test
-    public void testStatusDoneOfOrders() {
-        loginImmoviewer(immoviewer.confProperties.ConfPropertiesProject.getLOGIN(),
-                immoviewer.confProperties.ConfPropertiesProject.getPASSWORD());
+    public void testStatusDoneOfOrders() throws InterruptedException {
+        loginImmoviewer(ConfPropertiesProject.getLOGIN(),
+                ConfPropertiesProject.getPASSWORD());
         goToListOfStatus();
         chooseStatus();
         checkStatusOfResult();
