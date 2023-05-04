@@ -4,6 +4,7 @@ import com.codeborne.selenide.*;
 import immoviewer.confProperties.ConfPropertiesProject;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import static immoviewer.OrdersTestLocators.*;
@@ -19,10 +20,20 @@ public class OrdersTestSteps {
     public static void chooseStatus() {
         buttonOfStatusDone.click(); }
     @Step
+    public static void goNextPage() {
+        JavascriptExecutor jse = (JavascriptExecutor) WebDriverRunner.getWebDriver();
+        jse.executeScript("arguments[0].click()", buttonNextPage);
+    }
+    @Step
     public static void checkStatusOfResult() throws InterruptedException {
-        Thread.sleep(6000);
-        for (SelenideElement selenideElement : statusOfSelectedRow) {
-            selenideElement.shouldHave(Condition.text("DONE"));
+        String numberOfPagesOfResult = numberOfPages.getText();
+        int num = Integer.parseInt(numberOfPagesOfResult);
+        System.out.println(num);
+        for (int i = 0; i < num; i++) {
+            for (int j = 0; j < statusOfSelectedRow.size(); j++) {
+                statusOfSelectedRow.get(j).shouldHave(Condition.text("DONE"));
+            } goNextPage();
+            Thread.sleep(4000);
         }
     }
     public static void addScreenshot() {
