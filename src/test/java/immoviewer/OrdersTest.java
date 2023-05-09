@@ -1,34 +1,31 @@
 package immoviewer;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import immoviewer.confProperties.ConfPropertiesProject;
-import io.qameta.allure.selenide.AllureSelenide;
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import java.io.IOException;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static immoviewer.OrdersTestSteps.*;
-import static immoviewer.confProperties.AuthenticationProject.loginImmoviewer;
+import static immoviewer.selectedOrdersByStatus.OrdersTestSteps.*;
+import static immoviewer.auth.AuthenticationProject.loginImmoviewer;
 
 public class OrdersTest {
 
     @BeforeEach
-    public void configurations() {
+    public void configurations() throws IOException {
         Configuration.headless = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
         Configuration.timeout = 10000;
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
-        openBaseUrl();
+        System.getProperties().load(ClassLoader.getSystemResourceAsStream("conf.properties"));
+        Selenide.open(System.getProperty("BaseURL"));
     }
     @Test
-    public void testStatusDoneOfOrders() throws InterruptedException {
-        loginImmoviewer(ConfPropertiesProject.getLOGIN(),
-                ConfPropertiesProject.getPASSWORD());
+    public void testStatusOfOrders() throws InterruptedException {
+        loginImmoviewer(System.getProperty("login"), System.getProperty("password"));
         goToListOfStatus();
         chooseStatus();
-        checkStatusOfResult();
+        checkStatusOfSelectedOrders();
     }
     @AfterEach
     public void afterTest() {

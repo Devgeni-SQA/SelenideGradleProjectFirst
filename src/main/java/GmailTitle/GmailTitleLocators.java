@@ -1,4 +1,4 @@
-package docuSketch.GmailTitle;
+package GmailTitle;
 
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$;

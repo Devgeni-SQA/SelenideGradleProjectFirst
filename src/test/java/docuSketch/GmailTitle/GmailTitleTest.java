@@ -1,30 +1,28 @@
 package docuSketch.GmailTitle;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import java.io.IOException;
+import static GmailTitle.auth.Auth.login;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.open;
-import static docuSketch.GmailTitle.GmailTitleSteps.*;
+import static GmailTitle.GmailTitleSteps.*;
 
 public class GmailTitleTest {
 
     @BeforeEach
-    public void configurations() {
+    public void configurations() throws IOException {
         Configuration.headless = true;
         Configuration.browser = "chrome";
         Configuration.timeout = 10000;
-        Configuration.baseUrl = "https://www.google.com/";
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        open("/");
+        System.getProperties().load(ClassLoader.getSystemResourceAsStream("conf.properties"));
+        Selenide.open(System.getProperty("gmailURL"));
     }
     @Test
     public void testGmailTitle() {
-        loginToGoogleAccount();
+        login(System.getProperty("gmailusername"), System.getProperty("gmailpassword"));
         pushButtonGmail();
         checkTitleOfGmailPage();
     }

@@ -1,8 +1,7 @@
-package immoviewer.confProperties;
+package immoviewer.auth;
 import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
-
-import static immoviewer.OrdersTestLocators.*;
+import static immoviewer.selectedOrdersByStatus.OrdersTestLocators.*;
 
 public class AuthenticationProject {
 
