@@ -1,19 +1,15 @@
-package immoviewer;
+package immoviewer.selectedOrdersByStatus;
 
 import com.codeborne.selenide.*;
-import immoviewer.confProperties.ConfPropertiesProject;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import static immoviewer.OrdersTestLocators.*;
+import static immoviewer.selectedOrdersByStatus.OrdersTestLocators.*;
+
 public class OrdersTestSteps {
 
-    @Step
-    public static void openBaseUrl() {
-        Selenide.open(ConfPropertiesProject.getURL());
-    }
     @Step
     public static void goToListOfStatus() { panelOfStatus.click(); }
     @Step
@@ -25,15 +21,15 @@ public class OrdersTestSteps {
         jse.executeScript("arguments[0].click()", buttonNextPage);
     }
     @Step
-    public static void checkStatusOfResult() throws InterruptedException {
+    public static void checkStatusOfSelectedOrders() throws InterruptedException {
         String numberOfPagesOfResult = numberOfPages.getText();
         int num = Integer.parseInt(numberOfPagesOfResult);
-        System.out.println(num);
         for (int i = 0; i < num; i++) {
-            for (int j = 0; j < statusOfSelectedRow.size(); j++) {
-                statusOfSelectedRow.get(j).shouldHave(Condition.text("DONE"));
-            } goNextPage();
-            Thread.sleep(4000);
+            for (SelenideElement selectedOrdersStatus : selectedOrdersStatuses) {
+                selectedOrdersStatus.shouldHave(Condition.text("DONE"));
+            }
+            goNextPage();
+            Thread.sleep(10000);
         }
     }
     public static void addScreenshot() {

@@ -1,4 +1,4 @@
-package docuSketch.GmailTitle;
+package GmailTitle;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
@@ -6,12 +6,8 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-
-import static docuSketch.GmailTitle.GmailTitleLocators.buttonGmail;
-import static docuSketch.GmailTitle.GmailTitleLocators.titleOfGmailPage;
-import static docuSketch.authentication.Aythentication.login;
-import static docuSketch.authentication.ConfProperties.GMAILUSERNAME;
-
+import static GmailTitle.GmailTitleLocators.buttonGmail;
+import static GmailTitle.GmailTitleLocators.titleOfGmailPage;
 
 public class GmailTitleSteps {
 
@@ -20,17 +16,12 @@ public class GmailTitleSteps {
         GmailTitleLocators.buttonEnterToGoogleAccount.click();
     }
     @Step
-    public static void loginToGoogleAccount() {
-        login();
-    }
-
-    @Step
     public static void pushButtonGmail() {
         buttonGmail.click();
     }
     @Step
     public static void checkTitleOfGmailPage() {
-        titleOfGmailPage.shouldBe(Condition.innerText(GMAILUSERNAME));
+        titleOfGmailPage.shouldBe(Condition.innerText(System.getProperty("gmailusername")));
     }
     public static void addScreenshot() {
         Allure.getLifecycle().addAttachment(
