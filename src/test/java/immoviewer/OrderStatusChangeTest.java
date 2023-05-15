@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.Objects;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static immoviewer.auth.AuthenticationProjects.authentication;
+import static immoviewer.auth.AuthenticationProject.authentication;
 import static immoviewer.locators.Locators2.IdOfFirstOrder;
 import static immoviewer.steps.Steps1.addScreenshot;
 import static immoviewer.steps.Steps2.*;
@@ -18,7 +18,7 @@ public class OrderStatusChangeTest {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1440x900";
         Configuration.timeout = 10000;
-        //Configuration.headless = true;
+        Configuration.headless = true;
     }
 
     @BeforeEach
