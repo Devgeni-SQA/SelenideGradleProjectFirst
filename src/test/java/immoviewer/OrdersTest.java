@@ -6,8 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import java.io.IOException;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static immoviewer.selectedOrdersByStatus.OrdersTestSteps.*;
-import static immoviewer.auth.AuthenticationProject.loginImmoviewer;
+import static immoviewer.steps.Steps1.*;
+import static immoviewer.auth.AuthenticationProjects.authentication;
 
 public class OrdersTest {
 
@@ -22,8 +22,8 @@ public class OrdersTest {
     }
     @Test
     public void testStatusOfOrders() throws InterruptedException {
-        loginImmoviewer(System.getProperty("login"), System.getProperty("password"));
-        goToListOfStatus();
+        authentication(System.getProperty("login"), System.getProperty("password"));
+        goToTabStatus();
         chooseStatus();
         checkStatusOfSelectedOrders();
     }

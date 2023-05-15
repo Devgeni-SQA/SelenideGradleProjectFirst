@@ -1,4 +1,4 @@
-package immoviewer.selectedOrdersByStatus;
+package immoviewer.steps;
 
 import com.codeborne.selenide.*;
 import io.qameta.allure.Allure;
@@ -6,12 +6,12 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import static immoviewer.selectedOrdersByStatus.OrdersTestLocators.*;
+import static immoviewer.selectedOrdersByStatus.Locators1.*;
 
-public class OrdersTestSteps {
+public class Steps1 {
 
     @Step
-    public static void goToListOfStatus() { panelOfStatus.click(); }
+    public static void goToTabStatus() { tabStatus.click(); }
     @Step
     public static void chooseStatus() {
         buttonOfStatusDone.click(); }
