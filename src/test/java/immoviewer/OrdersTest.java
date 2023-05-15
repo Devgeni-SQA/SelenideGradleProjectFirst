@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import java.io.IOException;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static immoviewer.steps.Steps1.*;
-import static immoviewer.auth.AuthenticationProjects.authentication;
+import static immoviewer.auth.AuthenticationProject.authentication;
 
 public class OrdersTest {
 

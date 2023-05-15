@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class Locators2 {
 
-    public static SelenideElement tabAssignee = $x("//*[@id='mat-select-value-7']/span");
+    public static SelenideElement tabAssignee = $x("//div[@class='orders-filter']//div[4]//div/div/span[not(contains(@class, 'ripple'))]");
     public static SelenideElement tabStatus = $x("//div[@id='mat-select-value-5']/span");
     public static SelenideElement tabCustomer = $x("//body[@class='ff-app']//div[@class='filter-customer']//span");
     public static SelenideElement sendExternalProviderButton = $x("//span[text()=' Send to External Provider ']/ancestor::button");
