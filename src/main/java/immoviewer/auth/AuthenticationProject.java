@@ -3,7 +3,7 @@ import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
 import static immoviewer.locators.Locators1.*;
 
-public class AuthenticationProjects {
+public class AuthenticationProject {
 
     @Step
     public static void authentication(String login, String password) {
