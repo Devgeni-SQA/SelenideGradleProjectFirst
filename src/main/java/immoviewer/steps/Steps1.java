@@ -6,7 +6,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import static immoviewer.selectedOrdersByStatus.Locators1.*;
+import static immoviewer.locators.Locators1.*;
 
 public class Steps1 {
 
