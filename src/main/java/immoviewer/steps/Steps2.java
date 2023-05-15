@@ -12,31 +12,32 @@ public class Steps2 {
     @Step
     public static void filterByStatus(String status) {
         tabStatus.shouldBe(Condition.enabled).click();
-        ElementsCollection typeOfStatus = $$x("//div[contains(@class, 'status')]/p");
-        for (SelenideElement ofStatus : typeOfStatus) {
-            if (Objects.equals(status, ofStatus.getText())) {
-                ofStatus.click();
+        ElementsCollection listOfStatusTypes = $$x("//div[contains(@class, 'status')]/p");
+        for (SelenideElement typeOfStatus : listOfStatusTypes) {
+            if (Objects.equals(status, typeOfStatus.getText())) {
+                typeOfStatus.click();
             }
         }
         sendEscapeToTheBodyElement();
     }
     @Step
     public static void filterByAssignee(String assignee) {
-        tabAssignee.shouldBe(Condition.enabled).click();
-        ElementsCollection listAssignees = $$x("//*[contains(@id, 'mat-option')]//p");
-        for (SelenideElement listAssignee : listAssignees) {
-            if (Objects.equals(assignee, listAssignee.getText())) {
-                listAssignee.click();
+        tabAssignee.shouldBe(Condition.visible).click();
+        ElementsCollection listAssignees = $$x("//*[contains(@id, 'mat-option')]//p")
+                .filter(Condition.innerText(assignee));
+        for (SelenideElement typeOfassignee : listAssignees) {
+            if (Objects.equals(assignee, typeOfassignee.getText())) {
+                typeOfassignee.click();
             }
         }
         sendEscapeToTheBodyElement();
     }
     @Step
     public static void filterByCustomer(String customer) {
-        tabCustomer.shouldBe(Condition.enabled).click();
-        for (SelenideElement typesOfcustomer : typesOfcustomers) {
-            if (Objects.equals(customer, typesOfcustomer.getText())) {
-                typesOfcustomer.click();
+        tabCustomer.shouldBe(Condition.visible).click();
+        for (SelenideElement typeOfCustomer : typesOfcustomers) {
+            if (Objects.equals(customer, typeOfCustomer.getText())) {
+                typeOfCustomer.click();
             }
         }
         sendEscapeToTheBodyElement();
@@ -52,21 +53,22 @@ public class Steps2 {
         }
         return null;
     }
-@Step
-public static void verifyNewStatusAndReturnPreviousStatusOfOrder(String order, String status) throws InterruptedException {
-    ElementsCollection firstTabOfOrderRow = $$("tbody>tr")
-            .shouldBe(CollectionCondition.size(10));
-    Thread.sleep(2000);
+    @Step
+    public static void verifyNewStatusAndReturnPreviousStatusOfOrder(String order, String status) throws InterruptedException {
+        ElementsCollection firstTabOfOrderRow = $$("tbody>tr")
+                .filterBy(Condition.innerText(order));
+        Thread.sleep(2000);
 
-    for (SelenideElement selenideElement : firstTabOfOrderRow) {
-        if (Objects.equals(order, selenideElement.find("td:first-child p.mat-display-1")
-                .getText())) {
-            Assert.assertEquals(status, selenideElement.find("td:first-child div.table-td:last-child p")
-                    .shouldBe(Condition.visible).getText());
-            selenideElement.find("td:last-child > button:nth-child(2) i")
-                    .shouldBe(Condition.visible).click();
-            clickNewIterationAndStartDrawingButtons();
-            break;
+        for (SelenideElement selenideElement : firstTabOfOrderRow) {
+            if (Objects.equals(order, selenideElement.find("td:first-child p.mat-display-1")
+                    .getText())) {
+                Assert.assertEquals(status, selenideElement.find("td:first-child div.table-td:last-child p")
+                        .shouldBe(Condition.visible).getText());
+
+                selenideElement.find("td:last-child > button:nth-child(2) i")
+                        .shouldBe(Condition.visible).click();
+                clickNewIterationAndStartDrawingButtons();
+                break;
         }
     }
 }
@@ -80,7 +82,7 @@ public static void verifyNewStatusAndReturnPreviousStatusOfOrder(String order, S
     }
     @Step
     public static void clickLeftsideMenuOrdersButton() {
-        leftsideMenuOrdersButton.click();
+        leftsideMenuOrdersButton.shouldBe(Condition.visible).click();
     }
     @Step
     public static void clickClearFilterOnAssigneeButton() {

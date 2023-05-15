@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Objects;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static immoviewer.locators.Locators2.IdOfFirstOrder;
-import static immoviewer.auth.AuthenticationProjects.authentication;
+import static immoviewer.auth.AuthenticationProject.authentication;
 import static immoviewer.steps.Steps1.addScreenshot;
 import static immoviewer.steps.Steps2.*;
 
