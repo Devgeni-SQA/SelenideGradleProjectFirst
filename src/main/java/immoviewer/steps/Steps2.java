@@ -5,13 +5,13 @@ import io.qameta.allure.Step;
 import org.junit.Assert;
 import java.util.Objects;
 import static com.codeborne.selenide.Selenide.*;
-import static immoviewer.checkOrderStatusChange.Locators2.*;
+import static immoviewer.locators.Locators2.*;
 
 public class Steps2 {
 
     @Step
     public static void filterByStatus(String status) {
-        tabStatus.shouldBe(Condition.appear).click();
+        tabStatus.shouldBe(Condition.enabled).click();
         ElementsCollection typeOfStatus = $$x("//div[contains(@class, 'status')]/p");
         for (SelenideElement ofStatus : typeOfStatus) {
             if (Objects.equals(status, ofStatus.getText())) {
@@ -22,7 +22,7 @@ public class Steps2 {
     }
     @Step
     public static void filterByAssignee(String assignee) {
-        tabAssignee.shouldBe(Condition.appear).click();
+        tabAssignee.shouldBe(Condition.enabled).click();
         ElementsCollection listAssignees = $$x("//*[contains(@id, 'mat-option')]//p");
         for (SelenideElement listAssignee : listAssignees) {
             if (Objects.equals(assignee, listAssignee.getText())) {
@@ -33,7 +33,7 @@ public class Steps2 {
     }
     @Step
     public static void filterByCustomer(String customer) {
-        tabCustomer.shouldBe(Condition.appear).click();
+        tabCustomer.shouldBe(Condition.enabled).click();
         for (SelenideElement typesOfcustomer : typesOfcustomers) {
             if (Objects.equals(customer, typesOfcustomer.getText())) {
                 typesOfcustomer.click();
@@ -57,17 +57,14 @@ public static void verifyNewStatusAndReturnPreviousStatusOfOrder(String order, S
     ElementsCollection firstTabOfOrderRow = $$("tbody>tr")
             .shouldBe(CollectionCondition.size(10));
     Thread.sleep(2000);
-    String actualStatus;
-    SelenideElement editButton;
+
     for (SelenideElement selenideElement : firstTabOfOrderRow) {
         if (Objects.equals(order, selenideElement.find("td:first-child p.mat-display-1")
                 .getText())) {
-            actualStatus = selenideElement.find("td:first-child div.table-td:last-child p")
-                    .shouldBe(Condition.visible).getText();
-            editButton = selenideElement.find("td:last-child > button:nth-child(2) i")
-                    .shouldBe(Condition.interactable);
-            Assert.assertEquals(status, actualStatus);
-            editButton.click();
+            Assert.assertEquals(status, selenideElement.find("td:first-child div.table-td:last-child p")
+                    .shouldBe(Condition.visible).getText());
+            selenideElement.find("td:last-child > button:nth-child(2) i")
+                    .shouldBe(Condition.visible).click();
             clickNewIterationAndStartDrawingButtons();
             break;
         }
@@ -83,7 +80,7 @@ public static void verifyNewStatusAndReturnPreviousStatusOfOrder(String order, S
     }
     @Step
     public static void clickLeftsideMenuOrdersButton() {
-        leftsideMenuOrdersButton.shouldBe(Condition.interactable).click();
+        leftsideMenuOrdersButton.click();
     }
     @Step
     public static void clickClearFilterOnAssigneeButton() {
