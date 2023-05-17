@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.Objects;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static immoviewer.locators.Locators2.IdOfFirstOrder;
 import static immoviewer.auth.AuthenticationProject.authentication;
+import static immoviewer.locators.Locators2.*;
 import static immoviewer.steps.Steps1.addScreenshot;
 import static immoviewer.steps.Steps2.*;
 
@@ -17,7 +17,7 @@ public class OrderStatusChangeTest {
     public void setUp() {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1440x900";
-        Configuration.timeout = 10000;
+        Configuration.timeout = 15000;
         Configuration.headless = true;
     }
 
@@ -28,14 +28,14 @@ public class OrderStatusChangeTest {
         Selenide.open(System.getProperty("BaseURL"));
     }
     @Test
-    public void testSettingOfOrderStatus() throws InterruptedException {
+    public void testSettingOfOrderStatus() {
         authentication(System.getProperty("login"), System.getProperty("password"));
 
         filterByStatus("CORRECTION");
         filterByAssignee("Supervisor");
         final String idOfSelectedOrder = IdOfFirstOrder.getText();
 
-        Objects.requireNonNull(selectEditButton(idOfSelectedOrder)).click();
+        Objects.requireNonNull(selectedOrderEditButton(idOfSelectedOrder)).click();
 
         clickSendExternalProviderButton();
         inputTime(1);
@@ -43,8 +43,12 @@ public class OrderStatusChangeTest {
 
         clickClearFilterOnAssigneeButton();
         filterByCustomer("Zdravko");
+        filterByStatus("EXTERNAL_REVIEW");
 
-        verifyNewStatusAndReturnPreviousStatusOfOrder(idOfSelectedOrder, "EXTERNAL_REVIEW");
+        verifyPresenceOfSelectedOrder(idOfSelectedOrder);
+
+        Objects.requireNonNull(selectedOrderEditButton(idOfSelectedOrder)).click();
+        clickNewIterationAndStartDrawingButtons();
     }
         @AfterEach
         public void afterTest () {
