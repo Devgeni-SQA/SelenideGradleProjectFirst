@@ -17,6 +17,7 @@ public class Locators2 {
     public static SelenideElement clearFilterOnAssigneeButton = $x("//button[@class='clear-button']/i");
     public static ElementsCollection typesOfcustomers = $$x("//mat-option//p");
     public static ElementsCollection firstTabOfOrderRow = $$("tbody>tr");
-    public static SelenideElement newIterationButton = $x("//div[@class='order-control-button']/button");
+    public static SelenideElement newIterationButton = $x("//div[contains(@class, 'order-control-button')]//span[contains(text(), ' New Iteration ')]");//div[@class='order-control-button']/button");
     public static SelenideElement startDrawingButton = $x("//span[text()=' Start drawing ']/ancestor::button");
+    public static String valueOfStatusLocators = "td:first-child div.table-td:last-child p";
 }
