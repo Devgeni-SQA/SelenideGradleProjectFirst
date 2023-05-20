@@ -1,6 +1,7 @@
 package immoviewer.steps;
 import com.codeborne.selenide.*;
 import io.qameta.allure.Step;
+import org.junit.Assert;
 import java.util.Objects;
 import static com.codeborne.selenide.Selenide.*;
 import static immoviewer.locators.Locators2.*;
@@ -18,7 +19,6 @@ public class Steps2 {
         }
         sendEscapeToTheBodyElement();
     }
-
     @Step
     public static void filterByAssignee(String assignee) {
         tabAssignee.shouldBe(Condition.visible).click();
@@ -27,11 +27,11 @@ public class Steps2 {
         for (SelenideElement typeOfassignee : listAssignees) {
             if (Objects.equals(assignee, typeOfassignee.getText())) {
                 typeOfassignee.click();
+                break;
             }
         }
         sendEscapeToTheBodyElement();
     }
-
     @Step
     public static void filterByCustomer(String customer) {
         tabCustomer.shouldBe(Condition.visible).click();
@@ -77,10 +77,20 @@ public class Steps2 {
     }
     @Step
     public static void clickNewIterationAndStartDrawingButtons() {
-        newIterationButton.should(Condition.visible).click();
-        startDrawingButton.should(Condition.enabled).click();
+        Assert.assertTrue(newIterationButton.shouldBe(Condition.visible).isDisplayed());
+        newIterationButton.click();
+        Assert.assertTrue(startDrawingButton.shouldBe(Condition.interactable).isDisplayed());
+        startDrawingButton.click();
+        Assert.assertTrue(sendExternalProviderButton.shouldBe(Condition.visible).isDisplayed());//
     }
     public static void sendEscapeToTheBodyElement() {
         $x("//body").pressEscape();
+    }
+    @Step
+    public static void verifySingularityOfOrder(String order) throws InterruptedException {
+        Thread.sleep(2000);
+        ElementsCollection orderSelectedById = $$("tbody>tr")
+                .filterBy(Condition.innerText(order));
+        Assert.assertEquals(1, orderSelectedById.size());
     }
 }

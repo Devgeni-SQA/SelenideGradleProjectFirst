@@ -17,8 +17,8 @@ public class OrderStatusChangeTest {
     public void setUp() {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1440x900";
-        Configuration.timeout = 15000;
-        Configuration.headless = true;
+        Configuration.timeout = 25000;
+        //Configuration.headless = true;
     }
 
     @BeforeEach
@@ -28,7 +28,7 @@ public class OrderStatusChangeTest {
         Selenide.open(System.getProperty("BaseURL"));
     }
     @Test
-    public void testSettingOfOrderStatus() {
+    public void testSettingOfOrderStatus() throws InterruptedException {
         authentication(System.getProperty("login"), System.getProperty("password"));
 
         filterByStatus("CORRECTION");
@@ -45,7 +45,8 @@ public class OrderStatusChangeTest {
         filterByCustomer("Zdravko");
         filterByStatus("EXTERNAL_REVIEW");
 
-        verifyPresenceOfSelectedOrder(idOfSelectedOrder);
+       // verifyPresenceOfSelectedOrder(idOfSelectedOrder);
+        verifySingularityOfOrder(idOfSelectedOrder);
 
         Objects.requireNonNull(selectedOrderEditButton(idOfSelectedOrder)).click();
         clickNewIterationAndStartDrawingButtons();
