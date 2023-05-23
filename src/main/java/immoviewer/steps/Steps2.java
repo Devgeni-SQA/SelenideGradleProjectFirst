@@ -3,6 +3,7 @@ import com.codeborne.selenide.*;
 import immoviewer.SlackIntegrationTest;
 import io.qameta.allure.Step;
 import org.junit.Assert;
+import java.io.IOException;
 import java.util.Objects;
 import static com.codeborne.selenide.Selenide.*;
 import static immoviewer.locators.Locators2.*;
@@ -55,7 +56,7 @@ public class Steps2 {
         return null;
     }
     @Step
-    public static void verifyPresenceOfSelectedOrder(String order) {
+    public static void verifyPresenceOfSelectedOrder(String order) throws IOException {
         ElementsCollection firstTabOfOrderRow = $$("tbody>tr td:first-child p.mat-display-1");
         String res = "fails";
         try {

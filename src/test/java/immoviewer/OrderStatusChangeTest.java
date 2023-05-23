@@ -28,7 +28,7 @@ public class OrderStatusChangeTest {
         Selenide.open(System.getProperty("BaseURL"));
     }
     @Test
-    public void testSettingOfOrderStatus() {
+    public void testSettingOfOrderStatus() throws IOException {
         authentication(System.getProperty("login"), System.getProperty("password"));
 
         filterByStatus("CORRECTION");
