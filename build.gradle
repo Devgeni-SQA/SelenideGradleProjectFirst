@@ -21,6 +21,8 @@ dependencies {
 
     implementation 'com.codeborne:selenide:6.13.0'
     implementation 'io.qameta.allure:allure-selenide:2.18.1'
+
+    implementation 'com.github.seratch:jslack:3.4.2'
 }
 
 test {
