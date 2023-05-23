@@ -18,7 +18,7 @@ public class OrderStatusChangeTest {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1440x900";
         Configuration.timeout = 25000;
-        //Configuration.headless = true;
+        Configuration.headless = true;
     }
 
     @BeforeEach
@@ -28,7 +28,7 @@ public class OrderStatusChangeTest {
         Selenide.open(System.getProperty("BaseURL"));
     }
     @Test
-    public void testSettingOfOrderStatus() throws InterruptedException {
+    public void testSettingOfOrderStatus() {
         authentication(System.getProperty("login"), System.getProperty("password"));
 
         filterByStatus("CORRECTION");
@@ -36,17 +36,16 @@ public class OrderStatusChangeTest {
         final String idOfSelectedOrder = IdOfFirstOrder.getText();
 
         Objects.requireNonNull(selectedOrderEditButton(idOfSelectedOrder)).click();
-
         clickSendExternalProviderButton();
         inputTime(1);
-        clickLeftsideMenuOrdersButton();
 
+        clickLeftsideMenuOrdersButton();
         clickClearFilterOnAssigneeButton();
+
         filterByCustomer("Zdravko");
         filterByStatus("EXTERNAL_REVIEW");
 
-       // verifyPresenceOfSelectedOrder(idOfSelectedOrder);
-        verifySingularityOfOrder(idOfSelectedOrder);
+        verifyPresenceOfSelectedOrder(idOfSelectedOrder);
 
         Objects.requireNonNull(selectedOrderEditButton(idOfSelectedOrder)).click();
         clickNewIterationAndStartDrawingButtons();
