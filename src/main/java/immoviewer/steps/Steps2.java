@@ -1,5 +1,6 @@
 package immoviewer.steps;
 import com.codeborne.selenide.*;
+import immoviewer.SlackIntegrationTest;
 import io.qameta.allure.Step;
 import org.junit.Assert;
 import java.util.Objects;
@@ -56,8 +57,14 @@ public class Steps2 {
     @Step
     public static void verifyPresenceOfSelectedOrder(String order) {
         ElementsCollection firstTabOfOrderRow = $$("tbody>tr td:first-child p.mat-display-1");
-        firstTabOfOrderRow
-                .shouldHave(CollectionCondition.itemWithText(order));
+        String res = "fails";
+        try {
+            firstTabOfOrderRow
+                    .shouldHave(CollectionCondition.itemWithText(order));
+            res = "Success";
+        } finally {
+            SlackIntegrationTest.sendMsgToSlack(res);
+        }
     }
     @Step
     public static void clickSendExternalProviderButton() {
