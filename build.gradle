@@ -23,6 +23,7 @@ dependencies {
     implementation 'io.qameta.allure:allure-selenide:2.18.1'
 
     implementation 'com.github.seratch:jslack:3.4.2'
+    implementation 'io.rest-assured:rest-assured:5.3.0'
 }
 
 test {
